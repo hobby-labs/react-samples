@@ -30,8 +30,33 @@ const Card = ({ id, text, index, moveCard }) => {
         return;
       }
 
-      // TODO:
+      // 矩形を定義する
+      const hoverBoundingRect = ref.current?.getBoundingClientRect();
 
+      // 縦の中心を取得する
+      const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+
+      // マウスの位置を定義する
+      const clientOffset = monitor.getClientOffset();
+
+      // トップへのピクエル数を取得する
+      const hoverClientY = clientOffset.y = hoverBoundingRect.top;
+
+      // マウスがアイテムの高さの半分移動したときのみ動作する。
+      // 下方向にドラッグしたら、カーソルが下50% 移動したら動作する。
+      // 上方向にドラッグしたら、カーソルが上50% 移動したら動作する。
+
+      // 下方向にドラッグ
+      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+        return;
+      }
+
+      // 上方向にドラッグ
+      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+        return;
+      }
+
+      // TODO:
     }
   });
 
