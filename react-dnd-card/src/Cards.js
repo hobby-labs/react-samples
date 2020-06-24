@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-
+import React, { useState, useCallback } from 'react';
+import Card from "./Card";
+import update from "immutability-helper";
 
 const Cards = () => {
   const [cards, setCards] = useState([
@@ -15,8 +16,22 @@ const Cards = () => {
     }
   ])
 
+  const moveCard = useCallback((dragIndex, hoverIndex) => {
+    const dragCard = cards[dragIndex];
+    setCards(
+      update(
+        cards,
+        { $splice: [[dragIndex, 1], [hoverIndex, 0, dragCard]] }
+      )
+    )
+  })
+
+  // 1 つのCard をレンダリングする
   const renderCard = (card, index) => {
-    return <div>index = {index}, card.id = {card.id}, card.text = {card.text}</div>
+    return (
+      <Card key={card.id} index={index} id={card.id} text={card.text} moveCard={moveCard} />
+    )
+    //return <div>index = {index}, card.id = {card.id}, card.text = {card.text}</div>
   }
 
   return (
