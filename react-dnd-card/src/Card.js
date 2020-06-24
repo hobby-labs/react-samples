@@ -15,6 +15,26 @@ const Card = ({ id, text, index, moveCard }) => {
 
   const ref = useRef(null);
 
+  const [, drop] = useDrop({
+    accept: ItemTypes.CARD,
+    hover(item, monitor) {
+      if(!ref.current) {
+        return;
+      }
+
+      const dragIndex   = item.index;
+      const hoverIndex  = index;
+
+      if(dragIndex === hoverIndex) {
+        // ドラッグ先が自分自身の場合は、入れ替えをしない
+        return;
+      }
+
+      // TODO:
+
+    }
+  });
+
   const [{ isDragging }, drag] = useDrag({
     item:    { type: ItemTypes.CARD, id, index },
     collect: (monitor) => ({ isDragging: monitor.isDragging() })
