@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Card2 = ({ id, text, image, index, moveCard }) => {
+const Card0001 = ({ id, text, image, index, moveCard }) => {
   const ref = useRef(null)
   const classes = useStyles();
   const theme = useTheme();
@@ -131,4 +131,4 @@ const Card2 = ({ id, text, image, index, moveCard }) => {
   )
 }
 
-export default Card2;
+export default Card0001;

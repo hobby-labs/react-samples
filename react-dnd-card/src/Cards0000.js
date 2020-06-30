@@ -1,12 +1,8 @@
 import React, { useState, useCallback } from 'react';
-import Card from "./Card";
-import Card2 from "./Card2";
+import Card0001 from "./Card0001";
 import update from "immutability-helper";
 
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
-
-const Cards = () => {
+const Cards0000 = () => {
   const [cards, setCards] = useState([
     {
       id: 1,
@@ -23,7 +19,7 @@ const Cards = () => {
     },{
       id: 4,
       text: "text 4",
-      image: "katsudon.jpg"
+      image: "soba.jpg"
     }
   ])
 
@@ -44,29 +40,31 @@ const Cards = () => {
     //)
 
     return (
-      <Card2 key={card.id} index={index} image={card.image} id={card.id} text={card.text} moveCard={moveCard} />
+      <Card0001 key={card.id} index={index} image={card.image} id={card.id} text={card.text} moveCard={moveCard} />
     )
   }
 
-  return (
-      <Container maxWidth="md">
-        <Grid container style={{flexGrow: 1}} spacing={2}>
-          <Grid item xs={4}>
-            menu
-          </Grid>
-          <Grid item xs={8}>
-            { cards.map((card, i) => renderCard(card, i)) }
-          </Grid>
-        </Grid>
-      </Container>
-  )
+//  return (
+//      <Container maxWidth="md">
+//        <Grid container style={{flexGrow: 1}} spacing={2}>
+//          <Grid item xs={4}>
+//            menu
+//          </Grid>
+//          <Grid item xs={8}>
+//            <DndProvider backend={HTML5Backend}>
+//              { cards.map((card, i) => renderCard(card, i)) }
+//            </DndProvider>
+//          </Grid>
+//        </Grid>
+//      </Container>
+//  )
 
-  //return (
-  //  <div>
-  //    { cards.map((card, i) => renderCard(card, i)) }
-  //  </div>
-  //)
+  return (
+    <>
+      { cards.map((card, i) => renderCard(card, i)) }
+    </>
+  )
 }
 
-export default Cards;
+export default Cards0000;
 

@@ -1,16 +1,44 @@
-import React, { useRef } from 'react'
-import { useDrag, useDrop } from 'react-dnd'
-import { ItemTypes } from './ItemTypes'
+import React, { useRef } from 'react';
 
-const style = {
-  border: '1px dashed gray',
-  padding: '0.5rem 1rem',
-  marginBottom: '.5rem',
-  backgroundColor: 'white',
-  cursor: 'move',
-}
-const Card = ({ id, text, index, moveCard }) => {
-  const ref = useRef(null)
+import { makeStyles } from '@material-ui/core/styles';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
+
+import { useDrag, useDrop } from 'react-dnd';
+import { ItemTypes } from './ItemTypes';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    margin: theme.spacing(1)
+  },
+  details: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '50%'
+  },
+  content: {
+    flex: '1 0 auto',
+  },
+  cover: {
+    width: '50%',
+  },
+  controls: {
+    display: 'flex',
+    alignItems: 'center',
+    paddingLeft: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
+  },
+  playIcon: {
+    height: 64,
+    width: 64,
+  },
+}));
+
+const Card0201 = ({ index, id, name, calories, fat, carbs, protein, image, moveCard }) => {
+  const ref = useRef(null);
+  const classes = useStyles();
+
   const [, drop] = useDrop({
     accept: ItemTypes.CARD,
     hover(item, monitor) {
@@ -52,24 +80,27 @@ const Card = ({ id, text, index, moveCard }) => {
       item.index = hoverIndex
     },
   })
+
   const [{ isDragging }, drag] = useDrag({
     item: { type: ItemTypes.CARD, id, index },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
   })
+
   const opacity = isDragging ? 0 : 1
+
   drag(drop(ref))
-//  return (
-//    <div ref={ref} style={{ ...style, opacity }}>
-//      {text}
-//    </div>
-//  )
 
   return (
-    <div key={id} ref={ref}>id={id}, text={text}, index={index}, moveCard=</div>
+    <TableRow ref={ref} key={id}>
+      <TableCell component="th" scope="row">{id}</TableCell>
+      <TableCell component="th" scope="row">{name}</TableCell>
+      <TableCell component="th" scope="row">{calories}</TableCell>
+      <TableCell component="th" scope="row"><img src={"/img/" + image} className={classes.playIcon} /></TableCell>
+    </TableRow>
   )
-
 }
 
-export default Card;
+export default Card0201;
+
